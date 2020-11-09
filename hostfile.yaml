@@ -1,0 +1,73 @@
+---
+common:
+    mgmt: &mgmt 10.10.10.10
+    uname: &du myusername
+    upass: &dp mypassword
+
+bgp:
+   asn: &basn 65001
+   peertype: &bgpt internal
+   group: &bgroup INTERNAL_PEER
+
+nodes:
+   node1: &eins 10.100.100.1
+   node2: &zwei 10.100.100.2
+   node3: &drei 10.100.100.3
+   node4: &vier 10.100.100.4
+
+device:
+   - host: vmx-1
+     username: *du
+     password: *dp
+     ip: *mgmt
+     port: 41005
+     lo0: *eins
+     bgpasn: *basn
+     bgppeertype: *bgpt
+     bgpgroup: *bgroup
+     bgppeer:
+       - *zwei
+       - *drei
+       - *vier
+
+   - host: vmx-2
+     username: *du
+     password: *dp
+     ip: *mgmt
+     port: 41008
+     lo0: *zwei
+     bgpasn: *basn
+     bgppeertype: *bgpt
+     bgpgroup: *bgroup
+     bgppeer:
+       - *eins
+       - *drei
+       - *vier
+
+   - host: vmx-3
+     username: *du
+     password: *dp
+     ip: *mgmt
+     port: 41011
+     lo0: *drei
+     bgpasn: *basn
+     bgppeertype: *bgpt
+     bgpgroup: *bgroup
+     bgppeer:
+       - *eins
+       - *zwei
+       - *vier
+
+   - host: vmx-4
+     username: *du
+     password: *dp
+     ip: *mgmt
+     port: 41014
+     lo0: *vier
+     bgpasn: *basn
+     bgppeertype: *bgpt
+     bgpgroup: *bgroup
+     bgppeer:
+       - *eins
+       - *zwei
+       - *drei
