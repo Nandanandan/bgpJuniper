@@ -1,3 +1,4 @@
+#Objective of this script is to configure bgp on Juniper devices
 import sys
 from jnpr.junos import Device
 from jnpr.junos.utils.config import Config
