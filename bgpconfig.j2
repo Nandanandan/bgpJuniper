@@ -1,0 +1,9 @@
+set system host-name {{ host }}
+set protocols bgp group {{ bgpgroup }} type {{ bgppeertype }}
+set protocols bgp group {{ bgpgroup }} local-address {{ lo0 }}
+set protocols bgp group {{ bgpgroup }} family inet-vpn unicast
+set protocols bgp group {{ bgpgroup }} local-as {{ bgpasn }}
+set protocols bgp group {{ bgpgroup }} multipath
+{% for peer in bgppeer %}
+set protocols bgp group {{ bgpgroup }} neighbor {{ peer }}
+{% endfor %}
